@@ -5,47 +5,87 @@ var add_status = false;
 var subtract_status = false;
 var multiply_status = false;
 var divide_status = false;
+var display_text = ""
 
 function number_clicked(num){
-    if (number_1 == null && number_2 == null){ //if both numbers NULL
+    if (number_1 == null && number_2 == null){
         number_1 = num;
-        console.log("button clicked: " + num);
-        document.getElementById("display").innerHTML = number_1;
+        display_text = num;
+        document.getElementById("display").innerHTML = display_text;
     }
-    else if (number_1 != null && number_2 == null){ //if 1 NOT null and 2 is NULL
-        if (add_status == false && subtract_status == false && multiply_status == false && divide_status == false){ //if operation has not yet been clicked
+    else if (number_1 != null && number_2 == null){
+        if (add_status == false && subtract_status == false && multiply_status == false && divide_status == false){
             number_1 = "" + number_1 + num;
-            console.log("button clicked: " + num);
-            document.getElementById("display").innerHTML = number_1;
+            display_text = "" + display_text + num;
+            document.getElementById("display").innerHTML = display_text;
         }
-        else{ // if operation has been clicked
+        else{
             number_2 = num;
-            console.log("button clicked: " + num);
-            document.getElementById("display").innerHTML = number_2;
+            display_text = display_text + num;
+            document.getElementById("display").innerHTML = display_text;
             }
         }   
     else if (number_2 != null){
         number_2 = "" + number_2 + num;
-        console.log("button clicked: " + num);
-        document.getElementById("display").innerHTML = number_2;
+        display_text = display_text + num;
+        document.getElementById("display").innerHTML = display_text;
     }
 }
 
 function add(){
-    console.log("add");
     add_status = true;
+    display_text = display_text + "+";
+    document.getElementById("display").innerHTML = display_text;
+}
+
+function subtract(){
+    subtract_status = true;
+    display_text = display_text + "-";
+    document.getElementById("display").innerHTML = display_text;
+}
+
+function multiply(){
+    multiply_status = true;
+    display_text = display_text + "*";
+    document.getElementById("display").innerHTML = display_text;
+}
+
+function divide(){
+    divide_status = true;
+    display_text = display_text + "/";
+    document.getElementById("display").innerHTML = display_text;
 }
 
 function calculate_result(){
-    console.log("result");
-    result = Number(number_1) + Number(number_2);
-    document.getElementById("display").innerHTML = result;
-
+    if (add_status == true){
+        result = Number(number_1) + Number(number_2);
+        number_1 = Number(display_text);
+        document.getElementById("display").innerHTML = result;
+    }
+    else if (subtract_status == true){
+        result = Number(number_1) - Number(number_2);
+        number_1 = Number(display_text);
+        document.getElementById("display").innerHTML = result;
+    }
+    if (multiply_status == true){
+        result = Number(number_1) * Number(number_2);
+        number_1 = Number(display_text);
+        document.getElementById("display").innerHTML = result;
+    }
+    if (divide_status == true){
+        result = Number(number_1) / Number(number_2);
+        number_1 = Number(display_text);
+        document.getElementById("display").innerHTML = result;
+    }
 }
 
 function clear_data(){
-    console.log("cleared");
     number_1 = null;
     number_2 = null;
+    add_status = false;
+    subtract_status = false;
+    multiply_status = false;
+    divide_status = false;
+    display_text = ""
     document.getElementById("display").innerHTML = "0";
 }
