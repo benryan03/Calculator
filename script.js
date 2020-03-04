@@ -5,7 +5,8 @@ var add_status = false;
 var subtract_status = false;
 var multiply_status = false;
 var divide_status = false;
-var display_text = ""
+var display_text = "";
+var period = ".";
 
 function number_clicked(num){
     if (number_1 == null && number_2 == null){
