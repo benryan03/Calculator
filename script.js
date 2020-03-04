@@ -8,25 +8,40 @@ var divide_status = false;
 var display_text = "";
 var period = ".";
 
+function test_multiple_decimals(num, x){
+    if (String(eval("number_"+(x))).includes(".") == true && num == "."){
+        console.log("skip input");
+        return "";
+    }
+    else {
+        console.log("allow input");
+        return num;
+    }
+}
+
 function number_clicked(num){
     if (number_1 == null && number_2 == null){
+        num = test_multiple_decimals(num, 1);
         number_1 = num;
         display_text = num;
         document.getElementById("display").innerHTML = display_text;
     }
     else if (number_1 != null && number_2 == null){
         if (add_status == false && subtract_status == false && multiply_status == false && divide_status == false){
+            num = test_multiple_decimals(num, 1);
             number_1 = "" + number_1 + num;
             display_text = "" + display_text + num;
             document.getElementById("display").innerHTML = display_text;
         }
         else{
+            num = test_multiple_decimals(num, 2);
             number_2 = num;
             display_text = display_text + num;
             document.getElementById("display").innerHTML = display_text;
             }
         }   
     else if (number_2 != null){
+        num = test_multiple_decimals(num, 2);
         number_2 = "" + number_2 + num;
         display_text = display_text + num;
         document.getElementById("display").innerHTML = display_text;
