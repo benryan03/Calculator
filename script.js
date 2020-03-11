@@ -11,45 +11,43 @@ var period = ".";
 
 function test_multiple_decimals(num, x){
     if (String(eval("number_"+(x))).includes(".") == true && num == "."){
-        console.log("skip input");
-        return "";
+        return ""; //skip input
     }
     else {
-        console.log("allow input");
-        return num;
+        return num; //allow input
     }
 }
 
 function number_clicked(num){
+    //if this is the first number clicked after page load or "C" button
     if (number_1 == null && number_2 == null){
         num = test_multiple_decimals(num, 1);
         number_1 = num;
         display_text = num;
         document.getElementById("display").innerHTML = display_text;
     }
-    else if (number_1 != null && number_2 == null){
-        if (add_status == false && subtract_status == false && multiply_status == false && divide_status == false){
-            if (result_clicked == true){
-                clear_data();
-                num = test_multiple_decimals(num, 1);
-                number_1 = num;
-                display_text = num;
-                document.getElementById("display").innerHTML = display_text;
-            }
-            else{
-                num = test_multiple_decimals(num, 1);
-                number_1 = "" + number_1 + num;
-                display_text = "" + display_text + num;
-                document.getElementById("display").innerHTML = display_text;
-            }
-        }
-        else{
-            num = test_multiple_decimals(num, 2);
-            number_2 = num;
-            display_text = display_text + num;
-            document.getElementById("display").innerHTML = display_text;
-            }
-        }   
+    //if all operation statuses == false and result_clicked == false
+    if (number_1 != null && number_2 == null && add_status == false && subtract_status == false && multiply_status == false && divide_status == false && result_clicked == false){
+        num = test_multiple_decimals(num, 1);
+        number_1 = "" + number_1 + num;
+        display_text = "" + display_text + num;
+        document.getElementById("display").innerHTML = display_text;
+    }
+    //else if all operation statuses == false and result_clicked == true
+    else if (number_1 != null && number_2 == null && add_status == false && subtract_status == false && multiply_status == false && divide_status == false && result_clicked == true){
+        clear_data();
+        num = test_multiple_decimals(num, 1);
+        number_1 = num;
+        display_text = num;
+        document.getElementById("display").innerHTML = display_text;
+    }
+    //else if any operation status == true
+    else if (number_1 != null && number_2 == null && add_status == true || subtract_status == true || multiply_status == true || divide_status == true) {
+        num = test_multiple_decimals(num, 2);
+        number_2 = num;
+        display_text = display_text + num;
+        document.getElementById("display").innerHTML = display_text;
+    }   
     else if (number_2 != null){
         num = test_multiple_decimals(num, 2);
         number_2 = "" + number_2 + num;
