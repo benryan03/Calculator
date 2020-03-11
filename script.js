@@ -5,6 +5,7 @@ var add_status = false;
 var subtract_status = false;
 var multiply_status = false;
 var divide_status = false;
+var result_clicked = true;
 var display_text = "";
 var period = ".";
 
@@ -28,10 +29,19 @@ function number_clicked(num){
     }
     else if (number_1 != null && number_2 == null){
         if (add_status == false && subtract_status == false && multiply_status == false && divide_status == false){
-            num = test_multiple_decimals(num, 1);
-            number_1 = "" + number_1 + num;
-            display_text = "" + display_text + num;
-            document.getElementById("display").innerHTML = display_text;
+            if (result_clicked == true){
+                clear_data();
+                num = test_multiple_decimals(num, 1);
+                number_1 = num;
+                display_text = num;
+                document.getElementById("display").innerHTML = display_text;
+            }
+            else{
+                num = test_multiple_decimals(num, 1);
+                number_1 = "" + number_1 + num;
+                display_text = "" + display_text + num;
+                document.getElementById("display").innerHTML = display_text;
+            }
         }
         else{
             num = test_multiple_decimals(num, 2);
@@ -100,6 +110,9 @@ function calculate_result(){
     subtract_status = false;
     multiply_status = false;
     divide_status = false;
+
+    //this variable is set in case after "=" is clicked, a number is clicked before "C is clicked"
+    result_clicked = true
 }
 
 function clear_data(){
@@ -109,6 +122,7 @@ function clear_data(){
     subtract_status = false;
     multiply_status = false;
     divide_status = false;
+    result_clicked = false;
     display_text = ""
     document.getElementById("display").innerHTML = "0";
 }
