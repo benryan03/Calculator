@@ -93,6 +93,13 @@ function calculate_result(){
         number_1 = Number(display_text);
         document.getElementById("display").innerHTML = result;
     }
+    //these variables are set in case after "=" is clicked, an operation is clicked before "C" is clicked
+    number_1 = result;
+    number_2 = null;
+    add_status = false;
+    subtract_status = false;
+    multiply_status = false;
+    divide_status = false;
 }
 
 function clear_data(){
